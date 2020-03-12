@@ -14,6 +14,10 @@ public class MemberControllerGetTest extends MemberApiTest {
 
     // GET /members
 
+    /**
+     * Test that the backend returns a 401 UNAUTHORIZED HttpStatus
+     * when we are not authenticated
+     */
     @Test
     void givenNotAuthenticated_whenGetMembers_thenShouldReturnUnauthorized() {
         // given
@@ -25,6 +29,10 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
 
+    /**
+     * Test that the backend returns a MemberList with at least one member
+     * when we are authenticated as user
+     */
     @Test
     void givenAuthenticatedAsUser_whenGetMembers_thenShouldReturnMembers() {
         // given
@@ -39,6 +47,10 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertValidMemberList(response.getBody());
     }
 
+    /**
+     * Test that the backend returns a MemberList with at least one member
+     * when we are authenticated as admin
+     */
     @Test
     void givenAuthenticatedAsAdmin_whenGetMembers_thenShouldReturnMembers() {
         // given
@@ -53,6 +65,10 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertValidMemberList(response.getBody());
     }
 
+    /**
+     * Test that the backend returns a MemberList with at least one member
+     * when we are authenticated as super-admin
+     */
     @Test
     void givenAuthenticatedAsSuperAdmin_whenGetMembers_thenShouldReturnMembers() {
         // given
@@ -69,6 +85,10 @@ public class MemberControllerGetTest extends MemberApiTest {
 
     // GET /members/{id}
 
+    /**
+     * Test that the backend returns a 401 UNAUTHORIZED HttpStatus
+     * when we are not authenticated
+     */
     @Test
     void givenNotAuthenticated_whenGetMember_thenShouldReturnUnauthorized() {
         // given
@@ -80,6 +100,9 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
 
+    /**
+     * Test that the backend returns member details when we are authenticated as user
+     */
     @Test
     void givenAuthenticatedAsUser_whenGetMember_thenShouldReturnMemberDetails() {
         // given
@@ -95,6 +118,9 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertValidMember(response.getBody());
     }
 
+    /**
+     * Test that the backend returns member details when we are authenticated as admin
+     */
     @Test
     void givenAuthenticatedAsAdmin_whenGetMember_thenShouldReturnMemberDetails() {
         // given
@@ -110,6 +136,9 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertValidMember(response.getBody());
     }
 
+    /**
+     * Test that the backend returns member details when we are authenticated as super-admin
+     */
     @Test
     void givenAuthenticatedAsSuperAdmin_whenGetMember_thenShouldReturnMemberDetails() {
         // given
@@ -125,6 +154,10 @@ public class MemberControllerGetTest extends MemberApiTest {
         assertValidMember(response.getBody());
     }
 
+    /**
+     * Test that the backend returns 404 NOT FOUND HttpStatus
+     * when we request user details for non-existing id
+     */
     @Test
     void givenAuthenticatedAsUser_whenGetNonExistingMember_thenShouldReturn404() {
         // given
@@ -144,6 +177,7 @@ public class MemberControllerGetTest extends MemberApiTest {
     }
 
     private void assertValidMemberList(MemberList memberList) {
+        assertNotNull(memberList);
         assertNotNull(memberList.getMembers());
         assertNotEquals(0, memberList.getMembers().size());
     }
