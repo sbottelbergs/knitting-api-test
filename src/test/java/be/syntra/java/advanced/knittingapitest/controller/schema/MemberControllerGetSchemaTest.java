@@ -1,9 +1,15 @@
 package be.syntra.java.advanced.knittingapitest.controller.schema;
 
+import be.syntra.java.advanced.knittingapitest.dto.Address;
+import be.syntra.java.advanced.knittingapitest.dto.KnittingStitch;
+import be.syntra.java.advanced.knittingapitest.dto.Role;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.Set;
 
 import static be.syntra.java.advanced.knittingapitest.util.TestHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,8 +35,12 @@ public class MemberControllerGetSchemaTest {
         assertNotNull(jsonPath.getString("members[0].name"));
         assertNotNull(jsonPath.getString("members[0].email"));
         assertTrue(jsonPath.getInt("members[0].knownStitches") > 0);
+        assertNotNull(jsonPath.getString("members[0].role"));
 
-        assertNull(jsonPath.getString("members[0].role"));
+        assertNull(jsonPath.getString("members[0].firstName"));
+        assertNull(jsonPath.getString("members[0].lastName"));
+        assertNull(jsonPath.getString("members[0].phoneNumber"));
+        assertNull(jsonPath.getString("members[0].birthDate"));
         assertNull(jsonPath.getString("members[0].address"));
     }
 
