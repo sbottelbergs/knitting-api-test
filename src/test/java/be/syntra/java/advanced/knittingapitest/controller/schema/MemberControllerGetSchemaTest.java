@@ -21,7 +21,7 @@ public class MemberControllerGetSchemaTest {
         // given -- get members
         givenAtLeastOneMemberExists();
         Response response = RestAssured.given()
-                .auth().basic("user", "password")
+                .auth().preemptive().basic("user", "password")
                 .get(RESOURCE_URL);
 
         // when
@@ -50,7 +50,7 @@ public class MemberControllerGetSchemaTest {
         // given -- get members
         givenAtLeastOneMemberExists();
         Response response = RestAssured.given()
-                .auth().basic("user", "password")
+                .auth().preemptive().basic("user", "password")
                 .get(RESOURCE_URL + "/" + anExistingId()).andReturn();
 
         // when
@@ -74,7 +74,7 @@ public class MemberControllerGetSchemaTest {
         // given -- an existing member
         givenAtLeastOneMemberExists();
         Response response = RestAssured.given()
-                .auth().basic("user", "password")
+                .auth().preemptive().basic("user", "password")
                 .get(RESOURCE_URL + "/" + anExistingId()).andReturn();
 
         // when

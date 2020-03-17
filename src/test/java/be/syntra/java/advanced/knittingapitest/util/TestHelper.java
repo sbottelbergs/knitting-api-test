@@ -97,7 +97,8 @@ public class TestHelper {
         }
 
         return RestAssured.given()
-                .auth().basic("user", "password")
+                .auth()
+                .preemptive().basic("user", "password")
                 .get(RESOURCE_URL).andReturn()
                 .body()
                 .jsonPath()
@@ -111,7 +112,8 @@ public class TestHelper {
 
     private static int getNumberOfExistingMembers() {
         return RestAssured
-                .given().auth().basic("user", "password")
+                .given().auth()
+                .preemptive().basic("user", "password")
                 .get(RESOURCE_URL).body().jsonPath().getList("members").size();
     }
 }
