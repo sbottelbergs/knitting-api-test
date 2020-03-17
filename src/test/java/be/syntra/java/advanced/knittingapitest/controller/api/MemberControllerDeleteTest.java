@@ -63,10 +63,10 @@ public class MemberControllerDeleteTest extends MemberApiTest {
      * when we are authenticated and authorized to DELETE a member
      */
     @Test
-    void givenAuthenticatedAsAdmin_whenDeleteExistingMember_thenShouldReturnNoContent() {
+    void givenAuthenticatedAsSuperAdmin_whenDeleteExistingMember_thenShouldReturnNoContent() {
         // given
         givenAtLeastOneMemberExists();
-        initRestTemplate("admin", "admin");
+        initRestTemplate("super-admin", "super-admin");
 
         // when
         ResponseEntity<String> response = restTemplate.exchange(
@@ -85,10 +85,10 @@ public class MemberControllerDeleteTest extends MemberApiTest {
      * when we DELETE a non-existing member ({id} which doesn't exist)
      */
     @Test
-    void givenAuthenticatedAsAdmin_whenDeleteNonExistingMember_thenShouldReturn404() {
+    void givenAuthenticatedAsSuperAdmin_whenDeleteNonExistingMember_thenShouldReturn404() {
         // given
         final long nonExistingId = Long.MAX_VALUE;
-        initRestTemplate("admin", "admin");
+        initRestTemplate("super-admin", "super-admin");
 
         // when
         ResponseEntity<String> response = restTemplate.exchange(

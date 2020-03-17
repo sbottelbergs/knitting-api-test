@@ -44,7 +44,7 @@ public class IntegrationTest {
 
     private void testDeleteMember() {
         // given -- authenticate as admin
-        restTemplate = restTemplate.withBasicAuth("admin", "admin");
+        restTemplate = restTemplate.withBasicAuth("super-admin", "super-admin");
 
         // when -- delete member
         restTemplate.delete(RESOURCE_URL + "/" + member.getId());
@@ -72,7 +72,7 @@ public class IntegrationTest {
 
     private void testUpdateMemberDetails() {
         // given -- authenticated as super admin
-        restTemplate = restTemplate.withBasicAuth("super-admin", "super-admin");
+        restTemplate = restTemplate.withBasicAuth("admin", "admin");
 
         // when -- update member details
         memberDetail.setFirstName("New first name");

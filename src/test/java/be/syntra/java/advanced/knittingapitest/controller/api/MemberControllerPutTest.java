@@ -79,7 +79,7 @@ public class MemberControllerPutTest {
      * when we are authenticated and authorized to PUT a member
      */
     @Test
-    void givenAuthenticatedAsSuperAdmin_whenPutMember_thenShouldReturnNoContent() {
+    void givenAuthenticatedAsAdmin_whenPutMember_thenShouldReturnNoContent() {
         // given
         Member member = aMember();
         member.setId(existingMemberId);
@@ -90,7 +90,7 @@ public class MemberControllerPutTest {
                 HttpMethod.PUT,
                 new HttpEntity<>(
                         member,
-                        createBasicAuthHeader("super-admin", "super-admin")
+                        createBasicAuthHeader("admin", "admin")
                 ),
                 String.class);
 
@@ -107,7 +107,7 @@ public class MemberControllerPutTest {
      * Similar to form validation!
      */
     @Test
-    void givenAuthenticatedAsSuperAdmin_whenPutInvalidMember_thenShouldReturnBadRequest() {
+    void givenAuthenticatedAsAdmin_whenPutInvalidMember_thenShouldReturnBadRequest() {
         // given
         Member member = anInvalidMember();
         member.setId(existingMemberId);
@@ -118,7 +118,7 @@ public class MemberControllerPutTest {
                 HttpMethod.PUT,
                 new HttpEntity<>(
                         member,
-                        createBasicAuthHeader("super-admin", "super-admin")
+                        createBasicAuthHeader("admin", "admin")
                 ),
                 String.class);
 
@@ -131,7 +131,7 @@ public class MemberControllerPutTest {
      * when we put a member with valid details but non-matching id ( id field != /{id} )
      */
     @Test
-    void givenAuthenticatedAsSuperAdmin_whenPutMemberWithIncorrectId_thenShouldReturnBadRequest() {
+    void givenAuthenticatedAsAdmin_whenPutMemberWithIncorrectId_thenShouldReturnBadRequest() {
         // given
         Member member = aMember();
         member.setId(existingMemberId + 1);
@@ -142,7 +142,7 @@ public class MemberControllerPutTest {
                 HttpMethod.PUT,
                 new HttpEntity<>(
                         member,
-                        createBasicAuthHeader("super-admin", "super-admin")
+                        createBasicAuthHeader("admin", "admin")
                 ),
                 String.class);
 
@@ -155,7 +155,7 @@ public class MemberControllerPutTest {
      * when we put a member to a non existing endpoint ({id} doesn't exist)
      */
     @Test
-    void givenAuthenticatedAsSuperAdmin_whenPutMemberOnNonExistingId_thenShouldReturnNotFound() {
+    void givenAuthenticatedAsAdmin_whenPutMemberOnNonExistingId_thenShouldReturnNotFound() {
         // given
         final long nonExistingMemberId = Long.MAX_VALUE;
         Member member = aMember();
@@ -167,7 +167,7 @@ public class MemberControllerPutTest {
                 HttpMethod.PUT,
                 new HttpEntity<>(
                         member,
-                        createBasicAuthHeader("super-admin", "super-admin")
+                        createBasicAuthHeader("admin", "admin")
                 ),
                 String.class);
 
